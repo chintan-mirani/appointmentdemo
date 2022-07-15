@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+{% block content %}
+		<section class="content-header container">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col">
+						<h1>Users</h1>
+					</div>
+					<div class="col">
+						<ol class="breadcrumb float-sm-right float-right">
+							<li class="breadcrumb-item">
+								<a href="{{path('user_create')}}" data-toggle="tooltip" data-placement="top" title="Add" class="btn btn-primary float-right"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>			
+		</section>
+
+			<article class="content container">
+				<section id="main" class="content-body container">
+				<div style="overflow-x: auto;">
+					<table class="table datagrid">
+						<thead>
+							<tr>
+								<th class="header-for-field-id text-center text-nowrap">
+									Id
+								</th>
+
+								<th class="header-for-field-text text-center text-nowrap" dir="ltr">
+									First name
+								</th>
+
+								<th class="header-for-field-integer text-center text-nowrap" dir="ltr">
+									Last name								
+								</th>
+
+								<th class="header-for-field-boolean text-center" dir="ltr">
+									Email
+								</th>
+								
+								<th class="  header-for-field-boolean text-center text-nowrap" dir="ltr">								
+                                    Action									
+								</th>
+							</tr>
+						</thead>
+                        
+						<tbody>
+						{% for user in users %}
+
+							<tr>
+								<td data-label="ID" class=" text-center field-id">
+									{{ users.getPaginationData.firstItemNumber + loop.index - 1 }}                                
+								</td>
+
+								<td data-label="firstName" class=" text-center field-id">
+									{{ user.firstName }}
+								</td>
+
+								<td data-label="lastName" class=" text-center field-text">
+									{{ user.lastName }}
+								</td>
+
+								<td data-label="email" class="text-nowrap text-truncate  text-center field-text">
+									{{ user.email }}
+								</td>
+								
+								<td class="actions actions-as-dropdown text-center">
+									<div class="dropdown dropdown-actions ">
+								        <a href="{{path('user_update', {id:user.id})}}"  data-toggle="tooltip" data-placement="top" title="Edit" class="action"><i class="fas fa-edit"></i></a>
+										<a href="{{path('user_delete', {id:user.id})}}" onclick="return confirm('Are you sure you want to delete ?')" data-placement="top" title="Delete" class="action mx-2"><i class="fas fa-trash-alt"></i></a>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+						{% if users is empty %} 
+							<tr>
+								<td class="pt-3 text-center" colspan="6">
+									User not found
+								</td>
+							</tr>
+						{% endif %}
+						</tbody>
+						<tfoot>    											
+						</tfoot>
+					</table>
+					</div>
+					<div class="navigation mt-2 text-center float-right">
+						<strong> {{ knp_pagination_render(users) }} </strong>
+					</div>
+				</section>
+            </article>
+{% endblock %}

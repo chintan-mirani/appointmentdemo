@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appointment{% endblock %}
+{% block content %}
+		<section class="content-header container">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col">
+						<h1>Appointments</h1>
+					</div>
+					<div class="col">
+						<ol class="breadcrumb float-sm-right float-right">
+							<li class="breadcrumb-item">
+								<a href="{{path('appointment_create')}}" data-toggle="tooltip" data-placement="top" title="Add" class="btn btn-primary float-right"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+
+		</section>
+			<article class="content container">
+				<section id="main" class="content-body container">
+				<div style="overflow-x: auto;">
+					<table class="table datagrid">
+						<thead>
+							<tr>
+								<th class="header-for-field-id text-center text-nowrap">
+									Id
+								</th>
+
+								<th class="header-for-field-text text-center text-nowrap" dir="ltr">
+									Name						
+								</th>
+
+								<th class="header-for-field-integer text-center text-nowrap" dir="ltr">
+									Date								
+								</th>
+
+								<th class="header-for-field-boolean text-center" dir="ltr">
+									Start time
+								</th>
+
+								<th class="header-for-field-boolean text-center text-nowrap" dir="ltr">									
+                                    End time							
+								</th>
+
+								<th class="  header-for-field-boolean text-center text-nowrap" dir="ltr">
+                                    Action										
+								</th>
+							</tr>
+						</thead>
+                        
+						<tbody>
+						{% for appointment in appointments %}
+
+							<tr>
+								<td data-label="ID" class=" text-center field-id">
+									{{ appointments.getPaginationData.firstItemNumber + loop.index - 1 }}                                    
+								</td>
+
+								<td data-label="Name" class=" text-center field-id">
+									{{ appointment.name }}
+								</td>
+
+								<td data-label="date" class=" text-center field-text">
+									{{ appointment.date|date('d-m-Y') }}
+								</td>
+
+								<td data-label="startTime" class="text-nowrap text-truncate  text-center field-text">
+									{{ appointment.startTime|date('h:i A') }}
+								</td>
+
+								<td data-label="endTime" class=" text-center field-integer">
+                                    {{ appointment.endTime|date('h:i A') }}						
+								</td>
+								
+								<td class="actions actions-as-dropdown text-center">
+									<div class="dropdown dropdown-actions ">
+								        <a href="{{path('appointment_update', {id:appointment.id})}}"  data-toggle="tooltip" data-placement="top" title="Edit" class="action"><i class="fas fa-edit"></i></a>
+										<a href="{{path('appointment_delete', {id:appointment.id})}}" onclick="return confirm('Are you sure you want to delete ?')" data-placement="top" title="Delete" class="action mx-2"><i class="fas fa-trash-alt"></i></a>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+						{% if appointments is empty %} 
+							<tr>
+								<td class="pt-3 text-center" colspan="6">
+									Appointment not found
+								</td>
+							</tr>
+						{% endif %}
+						</tbody>
+						<tfoot>    				
+						</tfoot>
+					</table>
+					</div>
+					<div class="mt-2 navigation text-center float-right">
+						<strong> {{ knp_pagination_render(appointments) }} </strong>
+					</div>
+				</section>
+            </article>
+{% endblock %}

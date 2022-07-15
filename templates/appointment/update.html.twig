@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+{% block content %}
+	
+		<!-- Content Header (Page header) -->
+	 <section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Update appointment</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li
+								class="breadcrumb-item">{# <a href="">Home</a> #}
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			
+		</section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Update appointment</h3>
+              </div>
+              
+              <!-- /.card-header -->
+              <!-- form start -->
+              {{ form_start(form, {'attr': {'novalidate':'novalidate'}})}}
+                <div class="card-body">
+                  <div class="form-group">
+                  {{ form_label(form.name, 'Name')}} <span class="text-danger">*</span>
+                  {{ form_widget(form.name, {'attr':{'class': 'form-control'}})}}
+                  <span class="text-danger">{{ form_errors(form.name, {'attr':{'class': 'p-0 m-0'}}) }}</span>
+                  </div>
+                  <div class="form-group">
+                    {{form_label(form.date, 'Date')}} <span class="text-danger">*</span>
+                    {{ form_widget(form.date, {'attr':{'class': 'form-control'}})}}
+                    <span class="text-danger"> {{ form_errors(form.date) }}</span>
+                  </div>
+                  <div class="form-group">
+                    {{form_label(form.startTime, 'Start time')}} <span class="text-danger">*</span>
+                    {{ form_widget(form.startTime, {'attr':{'class': 'form-control'}})}}
+                    <span class="text-danger">{{ form_errors(form.startTime) }}</span>
+                  </div>                
+                  <div class="form-group">
+                    {{form_label(form.endTime, 'End time')}} <span class="text-danger">*</span>
+                    {{ form_widget(form.endTime, {'attr':{'class': 'form-control'}})}}
+                    <span class="text-danger">{{ form_errors(form.endTime) }}</span>
+                  </div>                
+                  <div class="form-group">
+                    {{form_label(form.users, 'Users')}} <span class="text-danger">*</span>
+                    {{ form_widget(form.users, {'attr':{'class': 'form-control'}})}}
+                    <span class="text-danger">{{ form_errors(form.users) }}</span>
+                  </div>                
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <a href="{{ path('appointment') }}" class="btn btn-primary ">Cancel</a>
+                </div>
+              {{ form_end(form) }}
+
+            </div>
+            <!-- /.card -->
+             </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <script>
+    $(document).ready(function(){
+
+        //$.each( user , function(index, value) {
+         //   console.log(value);
+           // $("select option[value='6']").attr("selected","selected");
+        //});
+    });
+    </script>
+    <!-- /.content -->
+{% endblock %}
